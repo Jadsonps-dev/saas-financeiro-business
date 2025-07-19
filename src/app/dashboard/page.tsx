@@ -3,8 +3,8 @@
 
 import { useUser } from '@clerk/nextjs'
 import { useUserData } from '@/hooks/useUserData'
-import RevenueCard from '@/components/RevenueCard'
-import TransactionsList from '@/components/TransactionsList'
+import { RevenueCard } from '@/components/RevenueCard'
+import { TransactionsList } from '@/components/TransactionsList'
 import { User, CreditCard, TrendingUp, DollarSign, Loader2 } from 'lucide-react'
 
 export default function Dashboard() {
