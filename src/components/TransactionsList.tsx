@@ -1,4 +1,3 @@
-
 import { ArrowUpRight, ArrowDownLeft, Building2, Wrench, Briefcase, Package } from 'lucide-react'
 
 const transactions = [
@@ -49,6 +48,22 @@ const transactions = [
   }
 ]
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  }).format(date);
+}
+
+function formatCurrency(amount: number): string {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(amount);
+}
+
 export function TransactionsList() {
   return (
     <div className="space-y-3">
@@ -86,13 +101,9 @@ export function TransactionsList() {
                   }`}>
                     {transaction.category}
                   </span>
-                  <span className="text-sm text-gray-500 font-medium">
-                    {new Date(transaction.date).toLocaleDateString('pt-BR', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric'
-                    })}
-                  </span>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {formatDate(transaction.date)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -101,7 +112,7 @@ export function TransactionsList() {
             <p className={`font-bold text-xl ${
               transaction.type === 'receita' ? 'text-green-600' : 'text-red-600'
             }`}>
-              {transaction.amount > 0 ? '+' : ''}R$ {Math.abs(transaction.amount).toLocaleString('pt-BR')}
+              {transaction.type === 'receita' ? '+' : '-'}{formatCurrency(transaction.amount)}
             </p>
             <p className="text-sm text-gray-500 font-medium mt-1">
               {transaction.type === 'receita' ? 'Entrada' : 'Saída'}
