@@ -2,7 +2,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
-import { ptBR } from '@clerk/localizations'
 
 export const metadata: Metadata = {
   title: 'SaaS Financeiro Business',
@@ -15,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider localization={ptBR}>
+    <ClerkProvider>
       <html lang="pt-BR">
         <body>{children}</body>
       </html>
